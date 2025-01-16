@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="logo">
+        <a href="#" onclick="loadContent('home')">Home</a>
+    </div>
+  <div id="container">
+    <!-- Statischer äußerer Bereich -->
+    <div id="sidebar">
+      
+      <nav>
+        <ul>
+            <li><a>PROJECTS</a>
+              <div class="dropdown-container">
+                <ul>
+                    <li><a href="#" onclick="loadContent('project1')">PROJECT 01</a></li>
+                    <li><a href="#" onclick="loadContent('reconstruction')">RECONSTRUCTION</a></li>
+                    <li><a href="#" onclick="loadContent('project3')">PROJECT 03</a></li>
+                </ul>
+              </div>
+            </li>
+                <li><a href="#" onclick="loadContent('music')">MUSIC</a>
+                <li><a href="#" onclick="loadContent('photo')">PHOTO</a>
+                    
+                </li>
+        </ul>
+      </nav>
+    </div>
+    <div id="content">
+      <!-- Dynamischer innerer Bereich -->
+      <div id="main-content">
+        <h2>Start</h2>
+        <p>Wähle ein Projekt aus der Navigation.</p>
+      </div>
+    </div>
+    <div id="sidebar-right">
+      <nav>
+        <ul>
+          <li><a href="#" onclick="loadContent('about')">ABOUT</a>
+            <li><a href="#" onclick="loadContent('contact')">CONTACT</a>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

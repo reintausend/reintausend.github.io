@@ -1,0 +1,80 @@
+html {
+    font-size: 10px; /* 1rem = 10px */
+  }
+  body {
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+    font-weight: 100;
+    background-color: #c8c6be;
+    height: 100vh; /* Gesamte Höhe */
+    overflow: hidden;
+    padding-top: 0rem;
+  }
+
+  #logo {
+    padding-top: 0rem; 
+    padding-left: 2rem; 
+    }
+
+  #container {
+    display: flex;
+    height: 100%; /* Nutzt die gesamte Höhe des Viewports */
+    padding-top: 0rem;
+    
+    
+  }
+  
+  #sidebar, #sidebar-right {
+    width: 20%; 
+    padding: 1rem;
+    box-sizing: border-box;
+    background-color: #c8c6be;
+    font-size: 2.6rem;
+    font-weight: bold;
+  }
+  
+  #sidebar-right {
+    text-align: right;
+  }
+  
+  
+  #sidebar nav ul, #sidebar-right nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #sidebar nav ul li, #sidebar-right nav ul li {
+    margin: 1rem; 
+
+  }
+  
+  #sidebar nav ul li a, #sidebar-right nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 2rem; 
+  }
+
+  .dropdown-container {
+    font-weight: 100;
+  }
+
+
+  
+  #content {
+    flex-grow: 1; /* Der dynamische Inhalt nimmt den verbleibenden Platz ein */
+    overflow-y: auto; /* Scrollen nur innerhalb des Inhaltsbereichs */
+    background-color: #ecebe5;
+    padding: 4rem; /* 20px → 2rem */
+    padding-bottom: 2rem;
+    box-sizing: border-box;
+    height: 100%; /* Stellt sicher, dass es den vollen Platz nutzt */
+    width: 60%;
+    font-size: 2rem;
+    
+    
+    
+    
+  }
+  
+
+  
