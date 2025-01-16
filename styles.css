@@ -1,6 +1,7 @@
 html {
     font-size: 10px; /* 1rem = 10px */
   }
+
   body {
     margin: 0;
     font-family: Helvetica, sans-serif;
@@ -19,14 +20,11 @@ html {
   #container {
     display: flex;
     height: 100%; /* Nutzt die gesamte Höhe des Viewports */
-    padding-top: 0rem;
-    
-    
   }
   
   #sidebar, #sidebar-right {
     width: 20%; 
-    padding: 1rem;
+    padding: 2rem;
     box-sizing: border-box;
     background-color: #c8c6be;
     font-size: 2.6rem;
@@ -44,7 +42,7 @@ html {
   }
   
   #sidebar nav ul li, #sidebar-right nav ul li {
-    margin: 1rem; 
+    margin: 0rem; 
 
   }
   
@@ -56,7 +54,11 @@ html {
 
   .dropdown-container {
     font-weight: 100;
+    padding: 1rem;
   }
+
+
+
 
 
   
@@ -74,6 +76,11 @@ html {
     
     
     
+  }
+
+  .ascii {
+    font-style: monospace;
+    font-size: 1.2rem;
   }
   
 
