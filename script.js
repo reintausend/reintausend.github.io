@@ -17,4 +17,8 @@ function loadContent(project) {
         mainContent.innerHTML = `<p>Fehler: ${error.message}</p>`; // Fehlermeldung anzeigen
       });
   }
-  
+
+
+//___________
+
+
