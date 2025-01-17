@@ -14,7 +14,15 @@ body {
   padding-left: 0rem;
   font-size: 8rem;
 
+<<<<<<< HEAD
 }
+=======
+  #logo {
+    padding-top: 0rem; 
+    padding-left: 0rem; 
+    font-size: 8rem;
+    }
+>>>>>>> 6e90504252bc9a383beb8da0cad19e125073d38a
 
 
 
