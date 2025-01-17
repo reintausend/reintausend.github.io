@@ -15,11 +15,12 @@ html {
   #logo {
     padding-top: 0rem; 
     padding-left: 2rem; 
+    font-size: 8rem;
     }
 
   #container {
     display: flex;
-    height: 100%; /* Nutzt die gesamte Höhe des Viewports */
+    height: 100vh; /* Nutzt die gesamte Höhe des Viewports */
   }
   
   #sidebar, #sidebar-right {
