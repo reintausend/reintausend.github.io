@@ -13,21 +13,21 @@ function loadContent(project) {
     if (selectedLink) {
         const menuItem = selectedLink.closest('.menu-item');
         if (menuItem) {
-            menuItem.style.backgroundColor = 'white';
+            menuItem.style.backgroundColor = '#ecebe5';
         }
         
         // If it's a dropdown link, also highlight the parent PROJECTS menu-item
         if (selectedLink.classList.contains('dropdown-link')) {
             const projectsMenuItem = document.querySelector('.has-dropdown');
             if (projectsMenuItem) {
-                projectsMenuItem.style.backgroundColor = 'white';
+                projectsMenuItem.style.backgroundColor = '#ecebe5';
             }
         }
     }
   
     // Handle logo container background - only white for home page
     if (leftLogoContainer) {
-        leftLogoContainer.style.backgroundColor = project === 'home' ? 'white' : 'transparent';
+        leftLogoContainer.style.backgroundColor = project === 'home' ? '#ecebe5' : 'transparent';
     }
 
     // Close dropdown menu when selecting a new item
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Set this item's background to white when dropdown is shown
     if (dropdownMenu.classList.contains('show')) {
-      this.style.backgroundColor = 'white';
+      this.style.backgroundColor = '#ecebe5';
     }
   });
 
@@ -114,19 +114,19 @@ document.addEventListener('DOMContentLoaded', function() {
   if (initialSelectedLink) {
       const menuItem = initialSelectedLink.closest('.menu-item');
       if (menuItem) {
-          menuItem.style.backgroundColor = 'white';
+          menuItem.style.backgroundColor = '#ecebe5';
       }
       // If initial page is a project, highlight the PROJECTS menu
       if (initialSelectedLink.classList.contains('dropdown-link')) {
           const projectsMenuItem = document.querySelector('.has-dropdown');
           if (projectsMenuItem) {
-              projectsMenuItem.style.backgroundColor = 'white';
+              projectsMenuItem.style.backgroundColor = '#ecebe5';
           }
       }
   }
   
   if (leftLogoContainer) {
-      leftLogoContainer.style.backgroundColor = path === 'home' ? 'white' : 'transparent';
+      leftLogoContainer.style.backgroundColor = path === 'home' ? '#ecebe5' : 'transparent';
   }
 
   updateContentMargin(); // Initial update
