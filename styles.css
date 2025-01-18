@@ -49,6 +49,11 @@ body {
   margin-left: auto;
 }
 
+.text-right {
+  text-align: right;
+}
+
+
 
 /*
 #sidebar nav ul,
@@ -88,7 +93,7 @@ ul.nav-menu {
 
 .ascii {
   font-style: monospace;
-  font-size: 1.2rem;
+  font-size: 0.5rem;
 }
 
 
@@ -103,7 +108,7 @@ ul.nav-menu {
 
 
 .menu-item {
-  color: #1500ff;
+  color: #000000;
   text-align: left;
   font-family: "Helvetica";
   font-size: 1.625rem;
