@@ -13,14 +13,14 @@ function loadContent(project) {
     if (selectedLink) {
         const menuItem = selectedLink.closest('.menu-item');
         if (menuItem) {
-            menuItem.style.backgroundColor = 'white';
+            menuItem.style.backgroundColor = '#c8c6be';
         }
         
         // If it's a dropdown link, also highlight the parent PROJECTS menu-item
         if (selectedLink.classList.contains('dropdown-link')) {
             const projectsMenuItem = document.querySelector('.has-dropdown');
             if (projectsMenuItem) {
-                projectsMenuItem.style.backgroundColor = 'white';
+                projectsMenuItem.style.backgroundColor = '#c8c6be';
             }
         }
     }
@@ -28,7 +28,7 @@ function loadContent(project) {
     // Handle logo container background for home page
     if (leftLogoContainer) {
       if (project === 'home') {
-        leftLogoContainer.style.backgroundColor = 'white';
+        leftLogoContainer.style.backgroundColor = '#c8c6be';
       } else {
         leftLogoContainer.style.backgroundColor = 'transparent';
       }
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Set this item's background to white when dropdown is shown
     if (dropdownMenu.classList.contains('show')) {
-      this.style.backgroundColor = 'white';
+      this.style.backgroundColor = '#c8c6be';
     }
   });
 
@@ -113,19 +113,19 @@ document.addEventListener('DOMContentLoaded', function() {
   if (initialSelectedLink) {
       const menuItem = initialSelectedLink.closest('.menu-item');
       if (menuItem) {
-          menuItem.style.backgroundColor = 'white';
+          menuItem.style.backgroundColor = '#c8c6be';
       }
       // If initial page is a project, highlight the PROJECTS menu
       if (initialSelectedLink.classList.contains('dropdown-link')) {
           const projectsMenuItem = document.querySelector('.has-dropdown');
           if (projectsMenuItem) {
-              projectsMenuItem.style.backgroundColor = 'white';
+              projectsMenuItem.style.backgroundColor = '#c8c6be';
           }
       }
   }
   
   if (leftLogoContainer) {
-      leftLogoContainer.style.backgroundColor = path === 'home' ? 'white' : 'transparent';
+      leftLogoContainer.style.backgroundColor = path === 'home' ? '#c8c6be' : 'transparent';
   }
 });
 
