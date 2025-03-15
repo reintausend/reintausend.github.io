@@ -2,134 +2,155 @@ function loadContent(project) {
     const mainContent = document.getElementById('main-content');
     const leftLogoContainer = document.querySelector('#sidebar .logo-container');
   
-    // Clear all previously selected items
+    // Clean up any existing p5 canvas
+    const existingCanvases = document.querySelectorAll('.p5Canvas');
+    existingCanvases.forEach(canvas => canvas.remove());
+    
+    // Remove any existing moodring scripts
+    const existingScripts = document.querySelectorAll('script[src*="moodring.js"]');
+    existingScripts.forEach(script => script.remove());
+
+    // Clear all previously selected items to 60% opacity
     const allMenuItems = document.querySelectorAll('.menu-item');
     allMenuItems.forEach(item => {
-        item.style.backgroundColor = 'transparent';
+        item.classList.remove('selected');
+        item.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
     });
     
-    // Set the clicked item's parent menu-item to white
+    // Clear all dropdown links to 60% opacity
+    const allDropdownLinks = document.querySelectorAll('.dropdown-link');
+    allDropdownLinks.forEach(link => {
+        link.classList.remove('active');
+        link.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+    });
+
+    // Set active states
     const selectedLink = document.querySelector(`[onclick="loadContent('${project}')"]`);
     if (selectedLink) {
-        const menuItem = selectedLink.closest('.menu-item');
-        if (menuItem) {
-            menuItem.style.backgroundColor = '#ecebe5';
-        }
-        
-        // If it's a dropdown link, also highlight the parent PROJECTS menu-item
         if (selectedLink.classList.contains('dropdown-link')) {
+            selectedLink.classList.add('active');
+            selectedLink.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
             const projectsMenuItem = document.querySelector('.has-dropdown');
             if (projectsMenuItem) {
-                projectsMenuItem.style.backgroundColor = '#ecebe5';
+                projectsMenuItem.classList.add('selected');
+                projectsMenuItem.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+            }
+        } else {
+            const menuItem = selectedLink.closest('.menu-item');
+            if (menuItem) {
+                menuItem.classList.add('selected');
+                menuItem.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
             }
         }
     }
   
-    // Handle logo container background - only white for home page
+    // Handle logo container
     if (leftLogoContainer) {
-        leftLogoContainer.style.backgroundColor = project === 'home' ? '#ecebe5' : 'transparent';
+        leftLogoContainer.classList[project === 'home' ? 'add' : 'remove']('selected');
+        leftLogoContainer.style.backgroundColor = project === 'home' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.6)';
     }
 
-    // Close dropdown menu when selecting a new item
-    const dropdownMenu = document.querySelector('.dropdown-menu');
-    if (!selectedLink?.classList.contains('dropdown-link')) {
-        dropdownMenu.classList.remove('show');
-    }
+    // Add or remove home-content class based on the project
+    mainContent.classList.toggle('home-content', project === 'home');
 
-    // Clear all previously selected dropdown links
-    const allDropdownLinks = document.querySelectorAll('.dropdown-link');
-    allDropdownLinks.forEach(link => {
-        link.classList.remove('active');
-    });
-    
-    // Set the clicked dropdown link as active
-    if (selectedLink && selectedLink.classList.contains('dropdown-link')) {
-        selectedLink.classList.add('active');
-    }
+    // Set the current page attribute
+    mainContent.setAttribute('data-page', project);
 
     fetch(`content/${project}.html`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Projekt nicht gefunden');
-        }
-        return response.text();
-      })
-      .then(data => {
-        mainContent.innerHTML = data;
-      })
-      .catch(error => {
-        mainContent.innerHTML = `<p>Fehler: ${error.message}</p>`;
-      });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Project not found');
+            }
+            return response.text();
+        })
+        .then(data => {
+            mainContent.innerHTML = data;
+            
+            if (project === 'moodring') {
+                // Load moodring.js with cache busting
+                const script = document.createElement('script');
+                script.src = '/content/moodring.js?v=' + Date.now();
+                document.body.appendChild(script);
+            }
+            
+            if (project === 'photo') {
+                console.log('Photo section loaded');
+                const photoGrid = document.getElementById('photo-grid');
+                console.log('Photo grid:', photoGrid);
+                loadPhotoContent();
+            }
+        })
+        .catch(error => {
+            mainContent.innerHTML = `<p>Error: ${error.message}</p>`;
+        });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  const projectsMenuItem = document.querySelector('.has-dropdown');
-  
-  projectsMenuItem.addEventListener('click', function(e) {
-    e.preventDefault();
-    const dropdownMenu = document.querySelector('.dropdown-menu');
-    dropdownMenu.classList.toggle('show');
-    this.classList.toggle('open');
-    
-    // Clear all other menu items and logo container background
+    // Set initial background colors for all menu items
     const allMenuItems = document.querySelectorAll('.menu-item');
     allMenuItems.forEach(item => {
-        item.style.backgroundColor = 'transparent';
+        item.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
     });
-    
-    const leftLogoContainer = document.querySelector('#sidebar .logo-container');
-    if (leftLogoContainer) {
-        leftLogoContainer.style.backgroundColor = 'transparent';
-    }
-    
-    // Set this item's background to white when dropdown is shown
-    if (dropdownMenu.classList.contains('show')) {
-      this.style.backgroundColor = '#ecebe5';
-    }
-  });
 
-  // Close dropdown when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.has-dropdown') && !e.target.closest('.dropdown-menu')) {
-      const dropdown = document.querySelector('.dropdown-menu');
-      const projectsMenuItem = document.querySelector('.has-dropdown');
-      if (dropdown.classList.contains('show')) {
-        dropdown.classList.remove('show');
-        projectsMenuItem.classList.remove('open');
-        // Only reset projects menu if no project is selected
-        const selectedProject = document.querySelector('.dropdown-link.active');
-        if (!selectedProject) {
-          projectsMenuItem.style.backgroundColor = 'transparent';
+    // Set initial background colors for all dropdown links
+    const allDropdownLinks = document.querySelectorAll('.dropdown-link');
+    allDropdownLinks.forEach(link => {
+        link.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+    });
+
+    // Set initial background color for logo container
+    const logoContainer = document.querySelector('.logo-container');
+    if (logoContainer) {
+        logoContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+    }
+
+    // Set initial selected state based on URL or default to home
+    const path = window.location.hash.slice(1) || 'home';
+    
+    // Update active states based on current path
+    const activeLink = document.querySelector(`[onclick="loadContent('${path}')"]`);
+    if (activeLink) {
+        if (activeLink.classList.contains('dropdown-link')) {
+            activeLink.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+            const projectsMenuItem = document.querySelector('.has-dropdown');
+            if (projectsMenuItem) {
+                projectsMenuItem.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+            }
+        } else {
+            const menuItem = activeLink.closest('.menu-item');
+            if (menuItem) {
+                menuItem.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+            }
         }
-      }
     }
-  });
 
-  // Set initial selected state based on URL or default to home
-  const path = window.location.hash.slice(1) || 'home';
-  const leftLogoContainer = document.querySelector('#sidebar .logo-container');
-  
-  // Set initial selected item
-  const initialSelectedLink = document.querySelector(`[onclick="loadContent('${path}')"]`);
-  if (initialSelectedLink) {
-      const menuItem = initialSelectedLink.closest('.menu-item');
-      if (menuItem) {
-          menuItem.style.backgroundColor = '#ecebe5';
-      }
-      // If initial page is a project, highlight the PROJECTS menu
-      if (initialSelectedLink.classList.contains('dropdown-link')) {
-          const projectsMenuItem = document.querySelector('.has-dropdown');
-          if (projectsMenuItem) {
-              projectsMenuItem.style.backgroundColor = '#ecebe5';
-          }
-      }
-  }
-  
-  if (leftLogoContainer) {
-      leftLogoContainer.style.backgroundColor = path === 'home' ? '#ecebe5' : 'transparent';
-  }
+    // Update logo container if on home page
+    if (path === 'home' && logoContainer) {
+        logoContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+    }
 
-  updateContentMargin(); // Initial update
+    const projectsMenuItem = document.querySelector('.has-dropdown');
+    
+    projectsMenuItem.addEventListener('click', function(e) {
+        e.preventDefault();
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        
+        // Toggle dropdown only when clicking the Projects menu item
+        dropdownMenu.classList.toggle('show');
+        this.classList.toggle('open');
+        
+        // Only change background color when toggling closed
+        if (!dropdownMenu.classList.contains('show')) {
+            this.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+            // Clear active state of dropdown links when closing
+            const dropdownLinks = document.querySelectorAll('.dropdown-link');
+            dropdownLinks.forEach(link => link.classList.remove('active'));
+        } else {
+            this.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+        }
+    });
+
+    updateContentMargin(); // Initial update
 });
 
 // Function to update content margin

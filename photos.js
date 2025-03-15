@@ -7,7 +7,7 @@ const photosList = [
 
 function createPhotoElement(src) {
   const div = document.createElement('div');
-  div.className = 'photo-item';
+  div.className = 'photo-card';
   
   const img = document.createElement('img');
   img.dataset.src = src; // Store the source for lazy loading
@@ -37,28 +37,75 @@ function lazyLoadImages() {
     });
   }, options);
 
-  document.querySelectorAll('.photo-item').forEach(item => {
+  document.querySelectorAll('.photo-card').forEach(item => {
     observer.observe(item);
   });
 }
 
+function initializeFullscreenViewer() {
+    const container = document.getElementById('fullscreen-container');
+    const fullscreenImage = document.getElementById('fullscreen-image');
+    const closeButton = document.querySelector('.close-button');
+    const photoCards = document.querySelectorAll('.photo-card');
+    let currentPhotoIndex = 0;
+
+    // Add click handlers to all photo cards
+    photoCards.forEach((card, index) => {
+        card.addEventListener('click', () => {
+            const img = card.querySelector('img');
+            fullscreenImage.src = img.src;
+            currentPhotoIndex = index;
+            container.classList.remove('fullscreen-hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when fullscreen
+        });
+    });
+
+    // Function to navigate to next/previous photo
+    function navigatePhoto(direction) {
+        currentPhotoIndex = (currentPhotoIndex + direction + photoCards.length) % photoCards.length;
+        const newImg = photoCards[currentPhotoIndex].querySelector('img');
+        fullscreenImage.src = newImg.src;
+    }
+
+    // Handle keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!container.classList.contains('fullscreen-hidden')) {
+            switch (e.key) {
+                case 'ArrowLeft':
+                    navigatePhoto(-1); // Previous photo
+                    break;
+                case 'ArrowRight':
+                    navigatePhoto(1); // Next photo
+                    break;
+                case 'Escape':
+                    closeFullscreen();
+                    break;
+            }
+        }
+    });
+
+    // Close fullscreen on clicking X or outside the image
+    closeButton.addEventListener('click', closeFullscreen);
+    container.addEventListener('click', (e) => {
+        if (e.target === container) {
+            closeFullscreen();
+        }
+    });
+}
+
+function closeFullscreen() {
+    const container = document.getElementById('fullscreen-container');
+    container.classList.add('fullscreen-hidden');
+    document.body.style.overflow = ''; // Restore scrolling
+}
+
 function loadPhotoContent() {
-  const photoGrid = document.getElementById('photo-grid');
-  photoGrid.innerHTML = ''; // Clear existing content
-  
-  // Hide model viewer if it exists
-  const modelSection = document.getElementById('model-section');
-  if (modelSection) modelSection.style.display = 'none';
-  
-  // Show photo grid
-  photoGrid.style.display = 'grid';
-  
-  // Create and append photo elements
-  photosList.forEach(photo => {
-    const photoElement = createPhotoElement(photo);
-    photoGrid.appendChild(photoElement);
-  });
-  
-  // Initialize lazy loading
-  lazyLoadImages();
+    // Don't clear or recreate the photo grid since it's already in our HTML
+    
+    // Hide model viewer if it exists
+    const modelSection = document.getElementById('model-section');
+    if (modelSection) modelSection.style.display = 'none';
+    
+    // Initialize fullscreen viewer
+    initializeFullscreenViewer();
 } 
