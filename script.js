@@ -79,11 +79,6 @@ function loadContent(project) {
                 console.log('Photo grid:', photoGrid);
                 loadPhotoContent();
             }
-
-            // Add this new block for music page
-            if (project === 'music') {
-                initMusicFilters();
-            }
         })
         .catch(error => {
             mainContent.innerHTML = `<p>Error: ${error.message}</p>`;
@@ -138,88 +133,24 @@ document.addEventListener('DOMContentLoaded', function() {
     
     projectsMenuItem.addEventListener('click', function(e) {
         e.preventDefault();
-        e.stopPropagation(); // Prevent event from bubbling up
         const dropdownMenu = document.querySelector('.dropdown-menu');
-        const isMobile = window.innerWidth <= 768;
         
-        // Toggle dropdown
+        // Toggle dropdown only when clicking the Projects menu item
         dropdownMenu.classList.toggle('show');
         this.classList.toggle('open');
         
-        // Update background color
-        this.style.backgroundColor = dropdownMenu.classList.contains('show') 
-            ? 'rgba(255, 255, 255, 0.8)' 
-            : 'rgba(255, 255, 255, 0.6)';
-        
-        // Handle dropdown links
-        const dropdownLinks = document.querySelectorAll('.dropdown-link');
+        // Only change background color when toggling closed
         if (!dropdownMenu.classList.contains('show')) {
+            this.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+            // Clear active state of dropdown links when closing
+            const dropdownLinks = document.querySelectorAll('.dropdown-link');
             dropdownLinks.forEach(link => link.classList.remove('active'));
+        } else {
+            this.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
         }
     });
 
     updateContentMargin(); // Initial update
-
-    // Set logo as selected by default
-    document.querySelector('#sidebar .logo-container').classList.add('selected');
-
-    const hamburger = document.querySelector('.hamburger-menu');
-    const sidebar = document.querySelector('#sidebar');
-    const sidebarRight = document.querySelector('#sidebar-right');
-    const content = document.querySelector('#content');
-    let isMenuOpen = false;
-
-    hamburger.addEventListener('click', () => {
-        isMenuOpen = !isMenuOpen;
-        hamburger.classList.toggle('active');
-        sidebar.classList.toggle('active');
-        
-        if (isMenuOpen) {
-            content.classList.add('menu-open');
-            document.body.style.overflow = 'hidden';
-            
-            // Make sure dropdown is visible if it was open
-            const dropdownMenu = document.querySelector('.dropdown-menu');
-            if (document.querySelector('.has-dropdown').classList.contains('open')) {
-                dropdownMenu.classList.add('show');
-            }
-        } else {
-            content.classList.remove('menu-open');
-            document.body.style.overflow = 'auto';
-        }
-    });
-
-    // Close menu when clicking a link
-    document.querySelectorAll('.nav-link, .dropdown-link').forEach(link => {
-        link.addEventListener('click', () => {
-            // Only close menu if it's not the Projects dropdown
-            if (isMenuOpen && !link.closest('.has-dropdown')) {
-                hamburger.click();
-            }
-        });
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (isMenuOpen && 
-            !e.target.closest('#sidebar') && 
-            !e.target.closest('#sidebar-right') && 
-            !e.target.closest('.hamburger-menu')) {
-            // Don't close if clicking the projects dropdown
-            if (!e.target.closest('.has-dropdown')) {
-                hamburger.click();
-            }
-        }
-    });
-
-    // Add click handler for logo containers
-    document.querySelectorAll('.logo-container').forEach(logo => {
-        logo.addEventListener('click', () => {
-            if (isMenuOpen) {
-                hamburger.click();
-            }
-        });
-    });
 });
 
 // Function to update content margin
@@ -236,28 +167,3 @@ function updateContentMargin() {
 
 // Add resize listener
 window.addEventListener('resize', updateContentMargin);
-
-// Add this new function
-function initMusicFilters() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const trackItems = document.querySelectorAll('.track-item');
-
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Remove active class from all buttons
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            // Add active class to clicked button
-            button.classList.add('active');
-
-            const filterValue = button.getAttribute('data-filter');
-
-            trackItems.forEach(item => {
-                if (filterValue === 'all' || item.getAttribute('data-type') === filterValue) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
-        });
-    });
-}

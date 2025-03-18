@@ -46,37 +46,8 @@ function initializeFullscreenViewer() {
     const container = document.getElementById('fullscreen-container');
     const fullscreenImage = document.getElementById('fullscreen-image');
     const closeButton = document.querySelector('.close-button');
-    const hamburgerMenu = document.querySelector('.hamburger-menu');
     const photoCards = document.querySelectorAll('.photo-card');
     let currentPhotoIndex = 0;
-    
-    // Add touch handling variables
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    // Add touch event listeners
-    fullscreenImage.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-    }, false);
-
-    fullscreenImage.addEventListener('touchmove', (e) => {
-        touchEndX = e.touches[0].clientX;
-    }, false);
-
-    fullscreenImage.addEventListener('touchend', () => {
-        const swipeDistance = touchEndX - touchStartX;
-        const minSwipeDistance = 50; // Minimum distance for a swipe
-
-        if (Math.abs(swipeDistance) > minSwipeDistance) {
-            if (swipeDistance > 0) {
-                // Swipe right - show previous photo
-                navigatePhoto(-1);
-            } else {
-                // Swipe left - show next photo
-                navigatePhoto(1);
-            }
-        }
-    }, false);
 
     // Add click handlers to all photo cards
     photoCards.forEach((card, index) => {
@@ -85,18 +56,7 @@ function initializeFullscreenViewer() {
             fullscreenImage.src = img.src;
             currentPhotoIndex = index;
             container.classList.remove('fullscreen-hidden');
-            document.body.style.overflow = 'hidden';
-            
-            // Hide hamburger menu
-            if (hamburgerMenu) {
-                hamburgerMenu.style.display = 'none';
-            }
-
-            // Close mobile menu if it's open
-            const sidebar = document.querySelector('#sidebar');
-            if (sidebar.classList.contains('active')) {
-                document.querySelector('.hamburger-menu').click();
-            }
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when fullscreen
         });
     });
 
@@ -135,15 +95,8 @@ function initializeFullscreenViewer() {
 
 function closeFullscreen() {
     const container = document.getElementById('fullscreen-container');
-    const hamburgerMenu = document.querySelector('.hamburger-menu');
-    
     container.classList.add('fullscreen-hidden');
     document.body.style.overflow = ''; // Restore scrolling
-    
-    // Show hamburger menu again
-    if (hamburgerMenu) {
-        hamburgerMenu.style.display = 'block';
-    }
 }
 
 function loadPhotoContent() {

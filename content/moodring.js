@@ -12,7 +12,7 @@ function initMoodRing() {
     const BUTTON_HEIGHT = 60;
     const BUTTON_MARGIN = 20;
     const BUTTON_RADIUS = 15;
-    const INACTIVE_COLOR = 245;
+    const INACTIVE_COLOR = 220;
     const DEFAULT_RING_COLOR = 180; // Grey color for inactive ring
     const SIDE_MARGIN = 100;
     const VERTICAL_OFFSET = 235; // Increased slightly to make room for text
