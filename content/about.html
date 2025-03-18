@@ -1,13 +1,60 @@
 <!-- <h2>About</h2> -->
-<img src="assets/about_photo.jpg"
-width="40%">
-<p> 
-    Born in Cologne, Germany <br>
-    Lives and works in Berlin, Germany <br>
-    <br>
+<div class="about-container">
+    <img src="assets/about_photo.jpg" width="40%">
+    <div class="about-content">
+        <div class="about-text">
+            Interfacedesign student at
+        </div>
+        <a href="https://www.fh-potsdam.de/studium-weiterbildung/studiengaenge/interfacedesign-b" class="about-link" target="_blank" rel="noopener noreferrer">
+            Fachhochschule Potsdam
+        </a>
+        <br>
+        
+        <div class="about-text">
+            Office Manager at
+        </div>
+        <a href="https://hellodigital.com/de" class="about-link" target="_blank" rel="noopener noreferrer">
+            Hello Digital GmbH
+        </a>
+        <br>
+        
+        <div class="about-text">
+            Born in <br> <a href="https://www.google.com/maps/place/Cologne" class="about-link" target="_blank" rel="noopener noreferrer">Cologne, Germany</a> <br><br>
+            Based in <br> <a href="https://www.google.com/maps/place/Berlin" class="about-link" target="_blank" rel="noopener noreferrer">Berlin, Germany</a>
+        </div>
+    </div>
+</div>
 
-    Interfacedesign student at Fachhochschule Potsdam <br>
-    <br>
-    Office Manager at Hello Digital GmbH, Berlin
-</p>
+<style>
+    .about-container {
+        display: flex;
+        align-items: flex-start;
+        gap: 4rem;
+    }
+
+    .about-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .about-text {
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 300;
+        line-height: 1.5;
+    }
+
+    .about-link {
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 300;
+        line-height: 1.5;
+        text-decoration: underline;
+        color: black;
+    }
+
+    .about-link:hover {
+        color: #0000FF;
+    }
+</style>
 

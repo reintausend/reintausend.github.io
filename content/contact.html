@@ -1,34 +1,41 @@
 <!-- <h2>Contact</h2>
 <p>How to contact meee ...</p> -->
-<pre class="ascii">
-                                               ..,.oooE777999V(;
-                                  ...oooP779090(;''       ''''  I
-                    ...ooB777979V;;''       .....=v}}=}=}=}}v==  5
-               97?(;''     .........< .    . .:.:.:.:.`:;``;;;;;;;;<;;;<;<<<<<<<<<<
-                 b ;           . : .:.:.:.`;;;;;;;;;;;<;;<;<<<<<<<<, I
-                 `,`               . : :.:.:.:.`.`;;;;;;;;;;;;<;<;<<. 5
-                  b ;                    . : .:.:.:.`;;;;;;;;;;;<;<;<: E
-                  `,<                         . . .:.:.:.``;;;;;;;;;;. I
-                   b :                             . . :.:.:.:.:.:.;;;. 5
-                   `>;                                  . .:..:.:.:.`.:  |
-                    b :                                      . . :.:.:.x T
-                    `,;                                          . . .::  E
-                     b :                                               _  !4
-                     `r :                                   __.__,--,;'))))).
-                      b :                         ___...--'; `))))))))' '' `>!9eOc
-                      `r :              __,--:-;;;)))))))))))'' '' ' ' _. -'-'.`!9Eg.
-                       L : . __.--_--:,)))))))))))'' ' '  _. ._.-'-'-'-'\-'\---\/\ ``Qu.
-                       `,: !x;:)))))))) ')'' ' _ _._-.'\'\_\_-'\''-\'_'\-'\'\ -_\'-\-. 95n.
-                        D` ))))'''  _ .___.-_:/-/\/-_\ /-_, /-,\ \-/_\/\,-\_/-\/-/--' ..v<]9o.
-                      __b :<> -_\._/\,- ,_ -\ _/\-\ _-\ -_/-\,\/,-/\_/-_\'\--' .vvvvvvv}v}}x}]NEo.
-                .ooPO%LOCu  `< `/\_ -:\/_/-/,\/,/-,/_,-/\ :_\:_-:__-'' ...vvvvvvvvvvvvxx}vx}}}}==No
-              .oPO'       `y. `< ~-\ _\/\_,- \ , - ,___..--' .......>>vvvvvvvvx>vvvvvvvvvv)v~~~`         iuuuaE'
-  .@tTL'                        `y,  `< .-vvv<<<<<<<<vvvvv=>~~~~`         _uuua'''
-.&P'                              `L,  `>>><<<<><>v~>^` `        _uuug'
-                                      `L,  ~~`          _uuua''
-                                        `L,:    _uuua''
-                                          `LaE''
-                                        
-</pre>
+<div class="contact-container">
+    <div class="contact-text">
+       
+    </div>
+    <a href="mailto:info@reintausend.com?subject=Contact from reintausend.com" class="mail-link">
+        <img src="assets/mail.svg" class="contact-image">
+    </a>
+</div>
 
-<h3><a href="mailto:reintausend@gmail.com?subject=Contact from reintausend.com">Send me a message!</a></h3>
+<style>
+    .contact-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .mail-link {
+        width: 70%;
+        cursor: pointer;
+    }
+
+    .contact-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .contact-text {
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 100;
+        font-style: italic;
+        line-height: 1.5;
+    }
+
+    .mail-link:hover {
+        opacity: 0.7;
+    }
+</style>

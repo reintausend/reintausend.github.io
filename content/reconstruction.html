@@ -1,5 +1,42 @@
 <!-- <h2>Reconstruction</h2> -->
 
-<iframe width="100%" height="500" src="https://www.youtube.com/embed/f1lrFu5w0bU?si=EMKjuiboNyiCq_Kc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div class="reconstruction-content">
+    <div class="video-wrapper">
+        <iframe 
+            src="https://www.youtube.com/embed/f1lrFu5w0bU?rel=0&modestbranding=1&controls=0" 
+            title="Reconstruction"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
 
-<p>Details zu Reconstruction...</p>
+    <div class="text-container">
+        <div class="content-headline">Reconstruction</div>
+        <div class="content-text">Details zu Reconstruction...</div>
+    </div>
+</div>
+
+<style>
+    .reconstruction-content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .video-wrapper {
+        width: 100%;
+        aspect-ratio: 16/9;
+        position: relative;
+    }
+
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+</style>
